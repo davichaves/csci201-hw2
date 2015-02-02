@@ -1,42 +1,50 @@
 package dchaves_CSCI201_Assignment2;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-//import java.util.Scanner;
+import java.util.Scanner;
 
 public class ReadFile {
-	private static String [] lines = new String[100];
-//	private static Scanner s; 
-//	private static String fileName = new String();
-	public static void readFile(String fileName) throws IOException, FileNotFoundException{
+	private static String [] lines = new String[21];
+	private static Scanner s = new Scanner (System.in); 
+	private static String fileName = new String();
+	private static int numberOfLines;
+	private static BufferedReader reader;
+	public static void readFile(String fileName) throws IOException, FileNotFoundException { 
         FileReader fileReader = new FileReader(fileName);
-        BufferedReader reader = new BufferedReader(fileReader);
-        int counter = 0;
+        reader = new BufferedReader(fileReader);
+        numberOfLines = 1;
         while (true) {
-            lines[counter] = reader.readLine();
-            if (lines[counter] == null) {
-                break;
-            }
-            counter++;
+			if (numberOfLines > 21) break;
+            lines[numberOfLines-1] = reader.readLine();
+            if (lines[numberOfLines-1] == null) break;
+            numberOfLines++;
         }
         reader.close();
         fileReader.close();
 	}
+	
+	public static void checkInput() throws BadInputException {
+		if (numberOfLines != 21) throw new BadInputException();
+		
+	}
+	
 	public static void main(String [] args){
-		//System.out.print("Which file?");
-        //fileName = s.next();
+		System.out.print("Which file? ");
+        fileName = s.next();
         try {
-			readFile("input.txt");
-		} catch (FileNotFoundException e) {
+			readFile(fileName);
+		} catch (FileNotFoundException fnfe) {
 			System.out.println("File not found!");
-		} catch (IOException e) {
-			System.out.println("Error reading the file!");
+		} catch (IOException ioe) {
+			System.out.println("Input error!");
+		} 
+        try {
+        	checkInput();
+        } catch (BadInputException bie) {
+        	System.out.println("Bad Input!");
 		}
-        for(int i = 0; i < 10; i++){
-        	System.out.println(lines[i]);
-        }
 	}
 }
