@@ -1,6 +1,12 @@
 package dchaves_CSCI201_Assignment2;
 
 public class Users {
+	private String name;
+	private int score;
+	Users( ) {
+		
+		
+	}
 	Users(String name, int score) {
 		this.setName(name);
 		this.setScore(score);
@@ -17,6 +23,4 @@ public class Users {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	private String name;
-	private int score;
 }
