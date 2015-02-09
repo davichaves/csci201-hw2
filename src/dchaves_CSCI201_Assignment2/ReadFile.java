@@ -142,8 +142,5 @@ public class ReadFile {
 	public Users [] returnUsers() {
 		return users;
 	}
-
-	private static void debug(){
-		System.out.println("pqp");
-	}
+	
 }

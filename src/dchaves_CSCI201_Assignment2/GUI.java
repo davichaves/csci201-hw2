@@ -21,6 +21,8 @@ public class GUI extends JFrame{
 	private Users [] users = new Users[10];
 	private char [][] myGrid = new char[10][10];
 	private String myString = new String("ABCDEFGHIJ ");
+	JLabel [] userLabel = new JLabel[15];
+	JLabel [][] gridLabel = new JLabel[11][11];
 	public GUI(char [][] grid, Users [] users){
 		super("Battleship");
 		for(int i = 0; i<10; i++) {
@@ -36,7 +38,6 @@ public class GUI extends JFrame{
 		setLocation((int)(width/2)-300,(int)(height/2)-200);
 		JPanel eastPanel = new JPanel();
 		JLabel topLabel = new JLabel("HighScores: ");
-		JLabel [] userLabel = new JLabel[15];
 		eastPanel.add(topLabel, BorderLayout.NORTH);
 		eastPanel.setLayout(new GridLayout(0,1));
 		eastPanel.setSize(200, 400);
@@ -53,7 +54,6 @@ public class GUI extends JFrame{
 		
 		westPanel.setLayout(new GridLayout(11,11));
 		westPanel.setSize(400,400);
-		JLabel [][] gridLabel = new JLabel[11][11];
 		for(int i = 0; i < 11; i++){
 			for(int j = 0; j < 11; j++){
 				if(j == 0 && i == 10) gridLabel[i][j] = new JLabel(" ");
@@ -64,12 +64,13 @@ public class GUI extends JFrame{
 			} //end of the inner for loop
 		} // end of the outer for loop
 		
-		
 		add(eastPanel, BorderLayout.EAST);
 		add(westPanel, BorderLayout.WEST);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	
+	public void updateLabel(int line, int column, String text) {
+		gridLabel[line][column].setText(text);
+	}
 }
