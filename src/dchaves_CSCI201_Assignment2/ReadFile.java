@@ -14,7 +14,7 @@ public class ReadFile {
 	private static BufferedReader reader;
 	private static FileReader fileReader;
 	
-	public void readFile(String fileName) throws IOException, FileNotFoundException { 
+	public ReadFile(String fileName) throws IOException, FileNotFoundException { 
         fileReader = new FileReader(fileName);
         reader = new BufferedReader(fileReader);
         numberOfLines = 0;
@@ -133,6 +133,14 @@ public class ReadFile {
 			if(myGrid[k][j] != myChar) return true;
 		}
 		return false;
+	}
+	
+	public char [][] returnGrid() {
+		return myGrid;
+	}
+	
+	public Users [] returnUsers() {
+		return users;
 	}
 
 	private static void debug(){

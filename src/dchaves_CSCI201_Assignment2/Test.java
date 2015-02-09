@@ -7,12 +7,12 @@ import java.util.Scanner;
 public class Test {
 	private static String fileName = new String();
 	private static Scanner s = new Scanner (System.in);
+	private static ReadFile rf;
 	public static void main(String [] args){
-		ReadFile rf = new ReadFile();
 		System.out.print("Which file? ");
         //fileName = s.next();
         try {
-			rf.readFile("input.txt");
+        	rf = new ReadFile("input.txt");
 		} catch (FileNotFoundException fnfe) {
 			System.out.println("File not found!");
 		} catch (IOException ioe) {
@@ -23,5 +23,6 @@ public class Test {
         } catch (BadInputException bie) {
         	System.out.println("Bad Input!");
 		}
+        GUI test = new GUI(rf.returnGrid(), rf.returnUsers());
 	}
 }
