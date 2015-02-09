@@ -14,8 +14,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class GUI extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Users [] users = new Users[10];
 	private char [][] myGrid = new char[10][10];
+	private String myString = new String("ABCDEFGHIJ ");
 	public GUI(char [][] grid, Users [] users){
 		super("Battleship");
 		for(int i = 0; i<10; i++) {
@@ -28,9 +33,8 @@ public class GUI extends JFrame{
 		double width = screenSize.getWidth();
 		double height = screenSize.getHeight();
 		setSize(600,400);
-		setLocation((int)(width/2)-200,(int)(height/2)-200);
+		setLocation((int)(width/2)-300,(int)(height/2)-200);
 		JPanel eastPanel = new JPanel();
-		add(eastPanel, BorderLayout.EAST);
 		JLabel topLabel = new JLabel("HighScores: ");
 		JLabel [] userLabel = new JLabel[15];
 		eastPanel.add(topLabel, BorderLayout.NORTH);
@@ -38,15 +42,34 @@ public class GUI extends JFrame{
 		eastPanel.setSize(200, 400);
 		for(int i = 0; i < 15; i++) {
 			if(i > 9) userLabel[i] = new JLabel("");
-			else userLabel[i] = new JLabel(i+1 + ". " + users[i].getName() + " - " + users[i].getScore() + " ");
+			else {
+				if(users[i].getScore() == 0) userLabel[i] = new JLabel(i+1 + ". ");
+				else userLabel[i] = new JLabel(i+1 + ". " + users[i].getName() + " - " + users[i].getScore() + " ");
+			}
 			eastPanel.add(userLabel[i]);
 		}
 		
 		JPanel westPanel = new JPanel();
+		
+		westPanel.setLayout(new GridLayout(11,11));
+		westPanel.setSize(400,400);
+		JLabel [][] gridLabel = new JLabel[11][11];
+		for(int i = 0; i < 11; i++){
+			for(int j = 0; j < 11; j++){
+				if(j == 0 && i == 10) gridLabel[i][j] = new JLabel(" ");
+				else if(j == 0) gridLabel[i][j] = new JLabel(" " + myString.charAt(i) + " ");
+				else if(i == 10) gridLabel[i][j] = new JLabel(" " + j + " ");
+				else gridLabel[i][j] = new JLabel(" ? ? ? ? ");
+				westPanel.add(gridLabel[i][j]);
+			} //end of the inner for loop
+		} // end of the outer for loop
+		
+		
+		add(eastPanel, BorderLayout.EAST);
 		add(westPanel, BorderLayout.WEST);
-		
-		
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	
 }

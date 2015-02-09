@@ -24,5 +24,14 @@ public class Test {
         	System.out.println("Bad Input!");
 		}
         GUI test = new GUI(rf.returnGrid(), rf.returnUsers());
+        int turn = 1;
+        String coord = new String();
+        while(true) {
+        	System.out.print("Turn " + turn + " - Please enter a Coordinate: ");
+            coord = s.next();
+        }
+	}
+	public static void checkInput() {
+		
 	}
 }
